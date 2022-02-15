@@ -17,11 +17,21 @@ public class Cargo {
         this.descricao = descricao;
     }
 
+    public Cargo(Integer id, String descricao) {
+        this.id = id;
+        this.descricao = descricao;
+    }
+
     public Integer getId() {
         return id;
     }
 
     public String getDescricao() {
         return descricao;
+    }
+
+    @Override
+    public String toString() {
+        return "O cargo : " + this.descricao + " tem id: " + this.id;
     }
 }
