@@ -13,8 +13,7 @@ public class Cargo {
     public Cargo() {
     }
 
-    public Cargo(Integer id, String descricao) {
-        this.id = id;
+    public Cargo(String descricao) {
         this.descricao = descricao;
     }
 
