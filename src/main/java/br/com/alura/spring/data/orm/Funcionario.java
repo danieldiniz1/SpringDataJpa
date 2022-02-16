@@ -1,8 +1,12 @@
 package br.com.alura.spring.data.orm;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "funcionarios")
@@ -13,9 +17,14 @@ public class Funcionario {
     private String nome;
     private String cpf;
     private BigDecimal salario;
-    private LocalDate dataContratacao = LocalDate.now();
+    private final LocalDate dataContratacao = LocalDate.now();
+
     @ManyToOne
     private Cargo cargo;
+
+    @Fetch(FetchMode.SELECT)
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<UnidadeTrabalho> unidadeTrabalho;
 
     public Funcionario() {
     }
@@ -67,8 +76,8 @@ public class Funcionario {
         return "Funcionario{" +
                 "nome='" + nome + '\'' +
                 ", cpf='" + cpf + '\'' +
-                ", salario=" + salario +
-                ", dataContratacao=" + dataContratacao +
-                "} e seu cargo é: ";
+                ", salário=" + salario +
+                ", data de contratacao=" + dataContratacao +
+                "} e seu cargo é: " + getCargo().getDescricao();
     }
 }

@@ -55,7 +55,7 @@ public class CrudFuncionarioService {
     private void visualizar() {
         Iterable<Funcionario> funcionarios = repository.findAll();
         System.out.println("Segue a lista de todos os funcionarios");
-        funcionarios.forEach(funcionario -> System.out.println(funcionario +" "+  funcionario.getCargo().getDescricao()));
+        funcionarios.forEach(funcionario -> System.out.println(funcionario));
     }
 
     private void excluir(Scanner scanner) {
