@@ -1,6 +1,7 @@
 package br.com.alura.spring.data.service;
 
 import br.com.alura.spring.data.orm.Cargo;
+import br.com.alura.spring.data.repository.CargoRepository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
@@ -10,9 +11,9 @@ import java.util.Scanner;
 public class CrudCargoService {
 
     private Boolean system = true;
-    private final CrudRepository repository;
+    private final CargoRepository repository;
 
-    public CrudCargoService(CrudRepository repository) {
+    public CrudCargoService(CargoRepository repository) {
         this.repository = repository;
     }
 
