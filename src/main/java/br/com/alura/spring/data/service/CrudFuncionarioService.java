@@ -6,8 +6,12 @@ import br.com.alura.spring.data.orm.UnidadeTrabalho;
 import br.com.alura.spring.data.repository.CargoRepository;
 import br.com.alura.spring.data.repository.FuncionarioRepository;
 import br.com.alura.spring.data.repository.UnidadeTrabalhoRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.awt.print.Pageable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +54,7 @@ public class CrudFuncionarioService {
                     excluir(scanner);
                     break;
                 case 4:
-                    visualizar();
+                    visualizar(scanner);
                     break;
                 default:
                     system = false;
@@ -79,8 +83,16 @@ public class CrudFuncionarioService {
     }
 
 
-    private void visualizar() {
-        Iterable<Funcionario> funcionarios = funcionarioRepository.findAll();
+    private void visualizar(Scanner scanner) {
+        System.out.println("Qual página deseja visualizar?");
+        Integer page = scanner.nextInt();
+
+        PageRequest pageable = PageRequest.of(page, 5, Sort.by(Sort.Direction.ASC, "nome"));
+        Page<Funcionario> funcionarios = funcionarioRepository.findAll(pageable);
+
+        System.out.println("Total de páginas: " + funcionarios);
+        System.out.println("Pagina atual: " + funcionarios.getNumber());
+        System.out.println("Total elementos: " + funcionarios.getTotalElements());
         System.out.println("Segue a lista de todos os funcionarios");
         funcionarios.forEach(funcionario -> System.out.println(funcionario));
     }
