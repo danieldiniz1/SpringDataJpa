@@ -47,6 +47,10 @@ public class Funcionario {
         this.nome =  nome;
     }
 
+    public void setUnidadeTrabalho(List<UnidadeTrabalho> unidadeTrabalho) {
+        this.unidadeTrabalho = unidadeTrabalho;
+    }
+
     public Integer getId() {
         return id;
     }
