@@ -28,6 +28,7 @@ public class RelatorioService {
             System.out.println("0 - Sair");
             System.out.println("1 - Buscar funcionario por nome");
             System.out.println("2 - Buscar funcionario por nome, data de contratação e salario");
+            System.out.println("3 - Buscar funcionario data de contratação");
 
             int action = scanner.nextInt();
 
@@ -38,6 +39,8 @@ public class RelatorioService {
                 case 2:
                     buscaFuncionarioNomeSalarioMaiorData(scanner);
                     break;
+                case 3:
+                    buscaFuncionarioDataContratacao(scanner);
                 default:
                     system = false;
                     break;
@@ -69,6 +72,15 @@ public class RelatorioService {
         BigDecimal salario = new BigDecimal(scanner.next());
 
         List<Funcionario> funcionarios = funcionarioRepository.findNomeDataContratacaoTemSalarioMaior(nome,salario,date);
+        funcionarios.forEach(funcionario -> System.out.println(funcionario));
+    }
+
+    private void buscaFuncionarioDataContratacao(Scanner scanner){
+        System.out.println("Qual a data de contratação deseja pesquisar: (dd/MM/yyyy)");
+        String data = scanner.next();
+        LocalDate date = LocalDate.parse(data,formatter);
+
+        List<Funcionario> funcionarios = funcionarioRepository.findDataContratacaoMaior(date);
         funcionarios.forEach(funcionario -> System.out.println(funcionario));
     }
 }

@@ -24,4 +24,7 @@ public interface FuncionarioRepository extends CrudRepository<Funcionario,Intege
 
     @Query("SELECT f FROM Funcionario f JOIN f.cargo c WHERE c.descricao = :descricao")
     List<Funcionario> findByCargoPelaDescricao(String descricao);
+
+    @Query(value = "SELECT * FROM funcionarios f WHERE f.data_contratacao >= :data", nativeQuery = true)
+    List<Funcionario> findDataContratacaoMaior(LocalDate data);
 }
